@@ -17,6 +17,8 @@ def artcode_i(s: str) -> list:
     Returns:
         list: la liste des tuples (caractère, nombre d'occurences)
     """
+    if not s:
+        return []
     tuples = []
     count  = 0
     for i in range(len(s)):
@@ -39,16 +41,13 @@ def artcode_r(s: str) -> list:
     Returns:
         list: la liste des tuples (caractère, nombre d'occurences)
     """
-    
-    # votre code ici
-    # cas de base
     if not s: 
         return []
     
     i = 1
     while i < len(s) and s[i]==s[0]:
         i +=1
-    
+
     tuple_a = (s[0], i)
 
     return [tuple_a] + artcode_r(s[i:])
