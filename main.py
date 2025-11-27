@@ -8,7 +8,7 @@ sys.setrecursionlimit(2000)
 #### Fonctions secondaires
 
 
-def artcode_i(s):
+def artcode_i(s: str) -> list:
     """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme itératif
 
     Args:
@@ -17,13 +17,20 @@ def artcode_i(s):
     Returns:
         list: la liste des tuples (caractère, nombre d'occurences)
     """
-    
-    # votre code ici
+    tuples = []
+    count  = 0
+    for i in range(len(s)):
+        if s[i] == s[i-1]:
+            count += 1
+        else: 
+            tuples.append((s[i-1], count))
+            count = 1
+    tuples.append((s[-1], count))
 
-    return [ ]
+    return tuples   
 
 
-def artcode_r(s):
+def artcode_r(s: str) -> list:
     """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme récursif
 
     Args:
@@ -34,16 +41,17 @@ def artcode_r(s):
     """
     
     # votre code ici
-
     # cas de base
-    # recherche nombre de caractères identiques au premier
-    # appel récursif
-
-    return []
+    if not s: 
+        return []
     
+    i = 1
+    while i < len(s) and s[i]==s[0]:
+        i +=1
+    
+    tuple_a = (s[0], i)
 
-#### Fonction principale
-
+    return [tuple_a] + artcode_r(s[i:])
 
 def main():
     print(artcode_i('MMMMaaacXolloMM'))
